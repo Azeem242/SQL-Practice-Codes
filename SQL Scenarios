@@ -1,0 +1,47 @@
+Question #1 : 
+Write an SQL query to find the top 3 products with the highest sales in the last month from a table named sales_data with the following columns:
+  product_id (INT): The unique identifier for each product.
+  product_name (VARCHAR): The name of the product.
+  sale_date (DATE): The date of the sale.
+  quantity_sold (INT): The number of units sold.
+
+CODE : 
+SELECT 
+    product_id, 
+    quantity_sold 
+FROM 
+    sales_data 
+WHERE 
+    sale_date BETWEEN '2025-01-15' AND '2025-02-15' 
+ORDER BY 
+    quantity_sold DESC 
+LIMIT 3;
+
+==========================================================================================================================================================================================================
+
+Question #2 : 
+Write an SQL query to find the total revenue generated for each product in the last quarter from a table named sales_data with the following columns:
+
+product_id (INT): The unique identifier for each product.
+product_name (VARCHAR): The name of the product.
+sale_date (DATE): The date of the sale.
+quantity_sold (INT): The number of units sold.
+price_per_unit (DECIMAL): The price of each unit sold.
+The result should include:
+
+product_id
+product_name
+total_revenue (calculated as quantity_sold * price_per_unit)
+Order the result by total_revenue in descending order.
+
+CODE : 
+SELECT
+    product_id, 
+    product_name, 
+    (quantity_sold * price_per_unit) AS total_revenue
+FROM 
+    sales_data
+WHERE 
+    sale_date BETWEEN '2024-11-15' AND '2025-02-15'
+ORDER BY 
+    total_revenue DESC;
