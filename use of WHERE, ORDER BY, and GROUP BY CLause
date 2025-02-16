@@ -45,3 +45,31 @@ WHERE
     sale_date BETWEEN '2024-11-15' AND '2025-02-15'
 ORDER BY 
     total_revenue DESC;
+
+==========================================================================================================================================================================================================
+Question #3 : 
+Write an SQL query to find customers who made more than 3 purchases in January 2025 from a table named orders with the following columns:
+
+order_id (INT): The unique identifier for each order.
+customer_id (INT): The unique identifier for each customer.
+order_date (DATE): The date when the order was placed.
+The result should include:
+
+customer_id
+total_orders (the count of orders made by that customer in January 2025)
+Order the result by total_orders in descending order.
+
+CODE : 
+SELECT 
+    customer_id, 
+    COUNT(order_id) AS total_orders
+FROM 
+    orders
+WHERE 
+    order_date BETWEEN '2025-01-01' AND '2025-01-31'
+GROUP BY 
+    customer_id
+HAVING 
+    total_orders > 3
+ORDER BY  
+    total_orders DESC;
