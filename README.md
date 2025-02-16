@@ -1,0 +1,1 @@
+In this project, I have included several scenario-based SQL queries along with their corresponding code. These queries were written using clauses such as WHERE, ORDER BY, and GROUP BY. The questions were inspired by Generative AI, and the code was developed purely for practice purposes.
