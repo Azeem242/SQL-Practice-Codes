@@ -1,10 +1,8 @@
-Write an SQL query to find the department with the highest average salary from the following tables:
+QUESTION 1 : 
+    Write an SQL query to find the department with the highest average salary from the following tables:
 
 Tables:
-1. employees
-pgsql
-Copy
-Edit
+    1. employees
 employees (
     id INT,
     name VARCHAR,
@@ -12,10 +10,7 @@ employees (
     salary DECIMAL
 )
 
-2. departments
-sql
-Copy
-Edit
+    2. departments
 departments (
     id INT,
     department_name VARCHAR
