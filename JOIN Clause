@@ -1,1 +1,53 @@
+Write an SQL query to find the department with the highest average salary from the following tables:
 
+Tables:
+1. employees
+pgsql
+Copy
+Edit
+employees (
+    id INT,
+    name VARCHAR,
+    department_id INT,
+    salary DECIMAL
+)
+
+2. departments
+sql
+Copy
+Edit
+departments (
+    id INT,
+    department_name VARCHAR
+)
+
+Requirement:
+a. Return the department name and the average salary.
+b. If multiple departments have the same highest average salary, return them all.
+c. The result should be ordered by the average salary in descending order.
+
+ANSWER CODE : 
+SELECT 
+    departments.department_name, 
+    AVG(employees.salary) AS avg_salary
+FROM 
+    employees
+JOIN 
+    departments ON employees.department_id = departments.id
+GROUP BY 
+    departments.department_name
+HAVING 
+    AVG(employees.salary) = (
+        SELECT 
+            MAX(avg_salary)
+        FROM (
+            SELECT 
+                AVG(salary) AS avg_salary
+            FROM 
+                employees
+            GROUP BY 
+                department_id
+        ) AS subquery
+    );
+
+========================================================================================================================================================================
