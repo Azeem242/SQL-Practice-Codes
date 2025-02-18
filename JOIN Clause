@@ -46,3 +46,48 @@ HAVING
     );
 
 ========================================================================================================================================================================
+Question 2 : Write an SQL query to find the employee with the highest salary in each department from the following tables:
+
+Tables:
+employees
+
+sql
+Copy
+employees (
+    id INT,
+    name VARCHAR,
+    department_id INT,
+    salary DECIMAL
+)
+departments
+
+sql
+Copy
+departments (
+    id INT,
+    department_name VARCHAR
+)
+
+Requirement:
+a. Return the employee name, department name, and salary for the highest-paid employee in each department.
+b. If multiple employees have the same highest salary in a department, return all of them.
+c. The result should be ordered by department name in ascending order and salary in descending order.
+
+
+ANSWER : 
+SELECT 
+    d.department_name,
+    e.name AS employee_name,
+    e.salary
+FROM 
+    employees e
+JOIN 
+    departments d ON e.department_id = d.id
+WHERE 
+    e.salary = (
+        SELECT MAX(salary) 
+        FROM employees 
+        WHERE department_id = e.department_id
+    )
+ORDER BY 
+    d.department_name ASC, e.salary DESC;
