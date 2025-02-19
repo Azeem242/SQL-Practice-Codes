@@ -91,3 +91,37 @@ WHERE
     )
 ORDER BY 
     d.department_name ASC, e.salary DESC;
+
+========================================================================================================================================================================
+Question 3 :
+Question:
+
+You have two tables:
+
+employees
+
+employee_id (INT)
+first_name (VARCHAR)
+last_name (VARCHAR)
+department_id (INT)
+hire_date (DATE)
+departments
+
+department_id (INT)
+department_name (VARCHAR)
+Write an SQL query to find the name of the department with the highest number of employees, including the department name and the number of employees in that department.
+
+SELECT 
+    d.department_name, 
+    COUNT(e.employee_id) AS employee_count
+FROM 
+    employees e
+JOIN 
+    departments d 
+ON 
+    e.department_id = d.department_id
+GROUP BY 
+    d.department_name
+ORDER BY 
+    employee_count DESC
+LIMIT 1;
