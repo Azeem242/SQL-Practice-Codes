@@ -1,3 +1,42 @@
+Question : 
+Write a SQL query to find the total sales amount and the number of orders made by each salesperson in each region. Include the salesperson's name, the region, and the number of orders, as well as the total sales amount (calculated by summing the sales).
+
+You have the following three tables:
+
+Table 1 : salespersons
+salesperson_id (INT)
+salesperson_name (VARCHAR)
+region_id (INT)
+
+Table 2 : regions
+region_id (INT)
+region_name (VARCHAR)
+country (VARCHAR)
+
+Table 3 : orders
+order_id (INT)
+salesperson_id (INT)
+order_date (DATE)
+order_amount (DECIMAL)
+customer_id (INT)
+order_status (VARCHAR)
+
+Answer : 
+SELECT 
+    s.salesperson_name, 
+    r.region_name, 
+    SUM(o.order_amount) AS Total_sales_amount, 
+    COUNT(o.order_id) AS number_of_orders
+FROM 
+    salespersons s
+JOIN 
+    regions r ON s.region_id = r.region_id
+JOIN 
+    orders o ON s.salesperson_id = o.salesperson_id
+GROUP BY 
+    s.salesperson_name, r.region_name;
+
+========================================================================================================================================================================
 Question : Write a SQL query to find the names of employees, their department names, and their manager's name.
 
 You have the following three tables:
