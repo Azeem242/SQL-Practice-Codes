@@ -1,4 +1,4 @@
-Question #1 : 
+Question #1  : 
 Write an SQL query to find the top 3 products with the highest sales in the last month from a table named sales_data with the following columns:
   product_id (INT): The unique identifier for each product.
   product_name (VARCHAR): The name of the product.
