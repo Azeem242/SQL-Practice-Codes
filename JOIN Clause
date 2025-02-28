@@ -1,4 +1,36 @@
-QUESTION 1 : 
+Question : Write a SQL query to find the names of employees, their department names, and their manager's name.
+
+You have the following three tables:
+1. employees
+employee_id (INT)
+employee_name (VARCHAR)
+department_id (INT)
+manager_id (INT) – This references the employee_id of the manager.
+
+2. departments
+department_id (INT)
+department_name (VARCHAR)
+
+3. managers
+manager_id (INT)
+manager_name (VARCHAR)
+
+Requirements:
+Return the employee name, their department name, and their manager's name.
+
+ANSWER : 
+SELECT 
+    e.employee_name, 
+    d.department_name, 
+    m.manager_name
+FROM 
+    employees e
+JOIN 
+    departments d ON e.department_id = d.department_id
+JOIN 
+    managers m ON e.manager_id = m.manager_id; 
+========================================================================================================================================================================
+QUESTION: 
     Write an SQL query to find the department with the highest average salary from the following tables:
 
 Tables:
@@ -46,7 +78,7 @@ HAVING
     );
 
 ========================================================================================================================================================================
-Question 2 : Write an SQL query to find the employee with the highest salary in each department from the following tables:
+Question: Write an SQL query to find the employee with the highest salary in each department from the following tables:
 
 Tables:
 employees
@@ -93,7 +125,6 @@ ORDER BY
     d.department_name ASC, e.salary DESC;
 
 ========================================================================================================================================================================
-Question 3 :
 Question:
 
 You have two tables:
