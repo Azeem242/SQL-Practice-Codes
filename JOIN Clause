@@ -3,7 +3,7 @@ You are working in the Trust and Safety team of a platform. Your task is to anal
 
 Tables:
 Users (Stores user information):
-    user_id (Primary Key)
+    user_id (Primary Key) 
     username
     email
     registration_date
