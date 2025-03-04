@@ -1,0 +1,48 @@
+Scenario:
+You're working as a Trust and Safety Analyst for a social media platform. Your job is to identify users who are repeatedly posting policy-violating content.
+
+The database has three tables:
+
+1. users
+user_id (Primary Key)
+username
+account_status (e.g., 'Active', 'Suspended')
+join_date
+country
+
+2. posts
+post_id (Primary Key)
+user_id (Foreign Key → users)
+content
+post_date
+status (e.g., 'Active', 'Removed')
+
+3. violations
+violation_id (Primary Key)
+post_id (Foreign Key → posts)
+violation_type (e.g., 'Hate Speech', 'Misinformation', 'Spam')
+review_date
+action_taken (e.g., 'Warning Issued', 'Post Removed', 'User Suspended')
+
+TASK : 
+Write an SQL query to identify users who have had at least 3 posts removed in the last 3 months due to policy violations and are still active users. 
+Sort the results by the number of violations in descending order.
+
+SOLUTION : 
+SELECT 
+    u.user_id, 
+    u.username, 
+    COUNT(p.post_id) AS total_posts, 
+    COUNT(v.violation_id) AS removed_posts, 
+    GROUP_CONCAT(DISTINCT v.violation_type SEPARATOR ', ') AS violation_types, 
+    MAX(v.review_date) AS last_violation_date, 
+    u.account_status
+FROM users AS u
+JOIN posts AS p ON u.user_id = p.user_id
+JOIN violations AS v ON p.post_id = v.post_id
+WHERE 
+    u.account_status = 'Active' 
+    AND v.review_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH)
+GROUP BY u.user_id, u.username, u.account_status
+HAVING COUNT(v.violation_id) >= 3
+ORDER BY removed_posts DESC;
