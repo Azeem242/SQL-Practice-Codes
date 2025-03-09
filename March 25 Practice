@@ -41,6 +41,27 @@ Columns to print:
         account_status
 
 CODE : 
+SELECT 
+    u.user_id,
+    u.username,
+    COUNT(v.violation_id) AS total_violations_last_6_months, 
+    MAX(v.violation_date) AS last_violation_date,
+    CASE 
+        WHEN COUNT(w.warning_id) > 0 THEN 'Yes' 
+        ELSE 'No' 
+    END AS warnings_received,
+    u.account_status
+FROM users AS u
+JOIN violations AS v 
+    ON u.user_id = v.user_id
+LEFT JOIN warnings AS w 
+    ON u.user_id = w.user_id
+WHERE v.violation_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)
+GROUP BY u.user_id, u.username, u.account_status
+HAVING 
+    COUNT(v.violation_id) >= 3 
+    AND MAX(v.violation_date) >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+ORDER BY total_violations_last_6_months DESC;
 
 ==================================================================================================================================
 
