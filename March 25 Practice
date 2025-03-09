@@ -1,8 +1,52 @@
-Scenario:
-You're working as a Trust and Safety Analyst for a social media platform. Your job is to identify users who are repeatedly posting policy-violating content.
+Scenario : The Trust & Safety team is investigating repeat offenders who are violating platform policies. Some users have multiple violations, and in certain cases, they continue violating even after receiving warnings.
+
+The Head of Trust & Safety wants to identify users who:
+    Have at least 3 policy violations in the last 6 months.
+    Continued violating the platform's policies even after receiving a warning.
+    Their most recent violation happened within the last 30 days.
+
+Available Tables:
+1. users
+    user_id (Primary Key)
+    username
+    account_status (e.g., 'Active', 'Suspended')
+    join_date
+    country
+
+2.violations
+    violation_id (Primary Key)
+    user_id (Foreign Key → users)
+    violation_type (e.g., 'Hate Speech', 'Spam', 'Misinformation')
+    violation_date (Date of violation)
+    action_taken (e.g., 'Warning Issued', 'Temporary Ban', 'No Action')
+    
+3.warnings
+    warning_id (Primary Key)
+    user_id (Foreign Key → users)
+    warning_date (Date when the warning was issued)
+    warning_reason (e.g., 'Repeated Hate Speech', 'Misinformation Spread')
+
+Question: Write a SQL query to identify users who meet all the criteria:
+
+At least 3 violations in the last 6 months.
+        Received at least one warning before their latest violation.
+        Most recent violation happened in the last 30 days.
+
+Columns to print:
+        user_id
+        username
+        total_violations_last_6_months
+        last_violation_date
+        warnings_received
+        account_status
+
+CODE : 
+
+==================================================================================================================================
+
+Scenario: You're working as a Trust and Safety Analyst for a social media platform. Your job is to identify users who are repeatedly posting policy-violating content.
 
 The database has three tables:
-
 1. users
 user_id (Primary Key)
 username
@@ -24,8 +68,7 @@ violation_type (e.g., 'Hate Speech', 'Misinformation', 'Spam')
 review_date
 action_taken (e.g., 'Warning Issued', 'Post Removed', 'User Suspended')
 
-TASK : 
-Write an SQL query to identify users who have had at least 3 posts removed in the last 3 months due to policy violations and are still active users. 
+TASK : Write an SQL query to identify users who have had at least 3 posts removed in the last 3 months due to policy violations and are still active users. 
 Sort the results by the number of violations in descending order.
 
 SOLUTION : 
@@ -46,3 +89,4 @@ WHERE
 GROUP BY u.user_id, u.username, u.account_status
 HAVING COUNT(v.violation_id) >= 3
 ORDER BY removed_posts DESC;
+==================================================================================================================================
